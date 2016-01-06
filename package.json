@@ -1,7 +1,15 @@
 {
   "name": "moduleLoader",
+  "version": "1.0.0",
+  "author": "DEG (http://degdigital.com)",
+  "repository": {
+        "type": "git",
+        "url": "https://github.com/DEGJS/moduleLoader.git"
+  },
   "jspm": {
   	"format": "es6",
-  	"registry": "jspm"
+  	"registry": "jspm",
+  	"main": "moduleLoader",
+  	"files": ["moduleLoader.js"]
   }
 }
