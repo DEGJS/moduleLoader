@@ -1,8 +1,8 @@
 let moduleLoader = {
 
     init: function() {
-        var elsWithModules = Array.prototype.slice.call(document.querySelectorAll('[data-module]'));
-        elsWithModules.forEach(this.loadModule);
+        var elsWithModules = document.querySelectorAll('[data-module]');
+        Array.from(elsWithModules).forEach(this.loadModule);
     },
 
     loadModule: function(el) {

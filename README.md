@@ -10,9 +10,13 @@ First, add the module as a data attribute:
 Then, get the referenced element from within your module:
 ``` javascript
 let module = function(props) {
-	let element = props.containerElement,
+	let element = props.containerElement
 };
 ```
 
-## Revision History
-* **1.0.0:** First commit.
+## Browser Support
+
+moduleLoader depends on the following browser APIs:
++ [Array.from](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from)
+
+To support legacy browsers, you'll need to include polyfills for the above APIs.
