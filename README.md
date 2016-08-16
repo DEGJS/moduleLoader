@@ -40,6 +40,7 @@ moduleLoader();
 ### Option B: Load modules on demand
 ```js
 import { moduleLoader } from "DEGS/moduleLoader";
+
 moduleLoader({
     loadImmediately: false
 }); // Initialize moduleLoader, but disable immediate module loading
@@ -60,7 +61,7 @@ The name of the data attribute that defines the module to be loaded. Defaults to
 ## Methods
 
 ### load(els)
-The load method will asynchronously load any modules defined on each supplied element's `data-module` attribute. Upon each successful load, it returns an object containing the following values:
+The load method will asynchronously load any modules defined on each supplied element's `data-module` attribute. Upon each successful load, an object is passed to the loaded module containing the following values:
 
 * **containerElement:** The element from which the module was called.
 
