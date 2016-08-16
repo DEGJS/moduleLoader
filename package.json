@@ -1,7 +1,7 @@
 {
     "name": "moduleLoader",
-    "version": "2.0.1",
-    "description": "Asynchronously loads ES6 modules via an HTML attribute.",
+    "version": "3.0.0",
+    "description": "Asynchronously load modules via an HTML attribute or JavaScript.",
     "keywords": [
         "DEGJS"
     ],
@@ -28,6 +28,9 @@
         "main": "moduleLoader.js",
         "directories": {
             "lib": "src"
+        },
+        "dependencies": {
+            "DEGJS/objectUtils": "github:DEGJS/objectUtils@^2.0.0"
         }
     }
 }
