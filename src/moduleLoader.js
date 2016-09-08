@@ -35,7 +35,7 @@ let moduleLoader = function(options) {
     init();
 
     return {
-        load: loadModules;
+        load: loadModules
     };
 
 };
