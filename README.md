@@ -30,16 +30,8 @@ Regardless of whether you load modules on page load or on demand, you must set t
 </div>
 ```
 
-### Option A: Load modules on page load
 ```js
-import { moduleLoader } from "DEGJS/moduleLoader";
-
-moduleLoader();
-```
-
-### Option B: Load modules on demand
-```js
-import { moduleLoader } from "DEGJS/moduleLoader";
+import moduleLoader from "DEGJS/moduleLoader";
 
 moduleLoader({
     loadImmediately: false
