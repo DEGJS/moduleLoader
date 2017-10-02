@@ -1,36 +1,33 @@
-import { ensureArray } from "DEGJS/objectUtils";
+import {ensureArray} from 'DEGJS/objectUtils';
 
 let moduleLoader = function(options) {
 
-    let settings,
-        defaults = {
-            loadImmediately: true,
-            moduleDataAttr: 'data-module'
-        };
+    const defaults = {
+        loadImmediately: true,
+        moduleDataAttr: 'data-module'
+    };
+    let settings;
 
     function init() {
         settings = Object.assign({}, defaults, options);
 
         if (settings.loadImmediately) {
-            let elsWithModules = Array.from(document.querySelectorAll('[' + settings.moduleDataAttr + ']'));
+            const elsWithModules = Array.from(document.querySelectorAll(`[${settings.moduleDataAttr}]`));
             loadModules(elsWithModules);
         }
-    };
+    }
 
     function loadModules(els) {
         els = ensureArray(els);
 
-        els.forEach(function(el) {
-            let module = el.getAttribute(settings.moduleDataAttr),
-                props = {
-                    'containerElement': el
-                };
-
-            System.import(module).then(function(mod) {
-                mod.default(props);
-            });
+        els.forEach(el => {
+            const module = el.getAttribute(settings.moduleDataAttr);
+            const props = {
+                'containerElement': el
+            };
+            System.import(module).then(mod => mod.default(props));
         });
-    };
+    }
 
     init();
 
