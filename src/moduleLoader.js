@@ -31,7 +31,7 @@ const moduleLoader = function(options = {}) {
         els.forEach(el => {
             const module = el.getAttribute(settings.moduleDataAttr);
             const props = {
-                'containerElement': el
+                containerElement: el
             };
             System.import(module).then(mod => mod.default(props));
         });
