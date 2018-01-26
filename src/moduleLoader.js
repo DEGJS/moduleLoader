@@ -1,39 +1,43 @@
-import {ensureArray} from 'DEGJS/objectUtils';
-
-let moduleLoader = function(options) {
+const moduleLoader = function(options = {}) {
 
     const defaults = {
-        loadImmediately: true,
         moduleDataAttr: 'data-module'
     };
-    let settings;
+    const mutationConfig = {
+        childList: true,
+        attributes: false,
+        characterData: false
+    };
+    const settings = Object.assign({}, defaults, options);
 
     function init() {
-        settings = Object.assign({}, defaults, options);
+        const observer = new MutationObserver(onMutation);
+        observer.observe(document.body, mutationConfig);
+    }
 
-        if (settings.loadImmediately) {
-            const elsWithModules = Array.from(document.querySelectorAll(`[${settings.moduleDataAttr}]`));
-            loadModules(elsWithModules);
+    function onMutation(mutationsList) {
+        for (const mutation of mutationsList) {
+            const moduleEls = getModuleEls(mutation);
+            loadModules(moduleEls);
         }
     }
 
-    function loadModules(els) {
-        els = ensureArray(els);
+    function getModuleEls(mutation) {
+        const addedEls = [...mutation.addedNodes];
+        return addedEls.filter(el => el.dataset && typeof el.dataset.module !== 'undefined');
+    }
 
+    function loadModules(els) {
         els.forEach(el => {
             const module = el.getAttribute(settings.moduleDataAttr);
             const props = {
-                'containerElement': el
+                containerElement: el
             };
             System.import(module).then(mod => mod.default(props));
         });
     }
 
     init();
-
-    return {
-        load: loadModules
-    };
 
 };
 
