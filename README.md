@@ -50,6 +50,8 @@ import moduleLoader from "DEGJS/moduleLoader";
     Component 2
 </div>
 
+moduleLoader();
+
 document.body.insertAdjacentHTML('beforeend', `
 	<div class="my-components my-component-3" data-module="components/myComponent3">
 	    Component 3
