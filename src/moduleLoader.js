@@ -1,39 +1,57 @@
-import {ensureArray} from 'DEGJS/objectUtils';
-
-let moduleLoader = function(options) {
+const moduleLoader = function(options = {}) {
 
     const defaults = {
-        loadImmediately: true,
-        moduleDataAttr: 'data-module'
+        moduleDataAttr: 'data-module',
+        elToObserve: document.body,
+        enableObservation: true
     };
-    let settings;
+    const mutationConfig = {
+        attributes: false,
+        characterData: false,
+        childList: true
+    };
+    const settings = {...defaults, ...options};
 
     function init() {
-        settings = Object.assign({}, defaults, options);
-
-        if (settings.loadImmediately) {
-            const elsWithModules = Array.from(document.querySelectorAll(`[${settings.moduleDataAttr}]`));
-            loadModules(elsWithModules);
+        const elsWithModules = [...document.querySelectorAll(`[${settings.moduleDataAttr}]`)];
+        loadModules(elsWithModules);
+        if (settings.enableObservation === true) {
+            initMutationObserver();
         }
     }
 
-    function loadModules(els) {
-        els = ensureArray(els);
+    function initMutationObserver() {
+        const observer = new MutationObserver(onMutation);
+        observer.observe(settings.elToObserve, mutationConfig);
+    }
 
+    function onMutation(mutationsList) {
+        for (const mutation of mutationsList) {
+            const moduleEls = getModuleEls(mutation);
+            loadModules(moduleEls);
+        }
+    }
+
+    function getModuleEls(mutation) {
+        const addedEls = [...mutation.addedNodes];
+        return addedEls.filter(el => isElement(el) && el.getAttribute(settings.moduleDataAttr));
+    }
+
+    function loadModules(els) {
         els.forEach(el => {
             const module = el.getAttribute(settings.moduleDataAttr);
             const props = {
-                'containerElement': el
+                containerElement: el
             };
             System.import(module).then(mod => mod.default(props));
         });
     }
 
-    init();
+    function isElement(item) {
+        return item instanceof Element;
+    }
 
-    return {
-        load: loadModules
-    };
+    init();
 
 };
 
