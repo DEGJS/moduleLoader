@@ -65,7 +65,7 @@ Upon each successful load, an object is passed to the loaded module containing t
 #### options.moduleDataAttr
 Type: `String`   
 The name of the data attribute that defines the module to be loaded.  
-Default: `data-module`.
+Default: `data-module`
 
 #### options.elToObserve
 Type: `Element`   
