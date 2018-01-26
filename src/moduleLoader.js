@@ -1,18 +1,25 @@
 const moduleLoader = function(options = {}) {
 
     const defaults = {
-        moduleDataAttr: 'data-module'
+        moduleDataAttr: 'data-module',
+        elToObserve: document.body
     };
     const mutationConfig = {
-        childList: true,
         attributes: false,
-        characterData: false
+        characterData: false,
+        childList: true
     };
-    const settings = Object.assign({}, defaults, options);
+    const settings = {...defaults, ...options};
 
     function init() {
+        const elsWithModules = [...document.querySelectorAll(`[${settings.moduleDataAttr}]`)];
+        loadModules(elsWithModules);
+        initMutationObserver();
+    }
+
+    function initMutationObserver() {
         const observer = new MutationObserver(onMutation);
-        observer.observe(document.body, mutationConfig);
+        observer.observe(settings.elToObserve, mutationConfig);
     }
 
     function onMutation(mutationsList) {
@@ -24,7 +31,7 @@ const moduleLoader = function(options = {}) {
 
     function getModuleEls(mutation) {
         const addedEls = [...mutation.addedNodes];
-        return addedEls.filter(el => el.dataset && el.dataset.module !== 'undefined');
+        return addedEls.filter(el => isElement(el) && el.getAttribute(settings.moduleDataAttr));
     }
 
     function loadModules(els) {
@@ -35,6 +42,10 @@ const moduleLoader = function(options = {}) {
             };
             System.import(module).then(mod => mod.default(props));
         });
+    }
+
+    function isElement(item) {
+        return item instanceof Element;
     }
 
     init();
