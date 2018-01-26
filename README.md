@@ -68,7 +68,7 @@ The name of the data attribute that defines the module to be loaded. Defaults to
 
 #### options.elToObserve
 Type: `Element`   
-The DOM element to observe for dynamically added elements.
+The DOM element to observe for dynamically added elements.  
 Default: document.body
 
 #### options.enableObservation
