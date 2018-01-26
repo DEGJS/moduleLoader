@@ -69,11 +69,11 @@ The name of the data attribute that defines the module to be loaded. Defaults to
 #### options.elToObserve
 Type: `Element`   
 The DOM element to observe for dynamically added elements.  
-Default: document.body
+Default: `document.body`
 
 #### options.enableObservation
 Type: `Boolean`   
-In some cases, you may know that no elements with modules will be added to the page after page load. Setting to `false` disables the potentially expensive mutation observer.
+In some cases, you may know that no elements with modules will be added to the page after page load. Setting to `false` disables the potentially expensive mutation observer.  
 Default: `true`
 
 ## Browser Support
