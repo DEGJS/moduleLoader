@@ -1,8 +1,7 @@
 import {ensureArray} from 'DEGJS/objectUtils';
 
-const moduleLoader = function(options) {
+const moduleLoader = function(options = {}) {
 
-    const bodyEl = document.body;
     const defaults = {
         moduleDataAttr: 'data-module'
     };
@@ -11,12 +10,11 @@ const moduleLoader = function(options) {
         attributes: false,
         characterData: false
     };
-    const observer = new MutationObserver(onMutation);
-    let settings;
+    const settings = Object.assign({}, defaults, options);
 
     function init() {
-        settings = Object.assign({}, defaults, options);
-        observer.observe(bodyEl, mutationConfig);
+        const observer = new MutationObserver(onMutation);
+        observer.observe(document.body, mutationConfig);
     }
 
     function onMutation(mutationsList) {
