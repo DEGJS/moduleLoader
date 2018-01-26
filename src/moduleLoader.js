@@ -11,6 +11,12 @@ const moduleLoader = function(options = {}) {
     const settings = Object.assign({}, defaults, options);
 
     function init() {
+        const elsWithModules = [...document.querySelectorAll(`[${settings.moduleDataAttr}]`)];
+        loadModules(elsWithModules);
+        initMutationObserver();
+    }
+
+    function initMutationObserver() {
         const observer = new MutationObserver(onMutation);
         observer.observe(document.body, mutationConfig);
     }
