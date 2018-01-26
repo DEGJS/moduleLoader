@@ -1,7 +1,7 @@
 {
     "name": "moduleLoader",
-    "version": "3.0.1",
-    "description": "Asynchronously load modules via an HTML attribute or JavaScript.",
+    "version": "4.0.0",
+    "description": "Asynchronously load JavaScript modules via an HTML attribute.",
     "keywords": [
         "DEGJS"
     ],

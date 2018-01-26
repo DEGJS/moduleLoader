@@ -2,7 +2,8 @@ const moduleLoader = function(options = {}) {
 
     const defaults = {
         moduleDataAttr: 'data-module',
-        elToObserve: document.body
+        elToObserve: document.body,
+        enableObservation: true
     };
     const mutationConfig = {
         attributes: false,
@@ -14,7 +15,9 @@ const moduleLoader = function(options = {}) {
     function init() {
         const elsWithModules = [...document.querySelectorAll(`[${settings.moduleDataAttr}]`)];
         loadModules(elsWithModules);
-        initMutationObserver();
+        if (settings.enableObservation === true) {
+            initMutationObserver();
+        }
     }
 
     function initMutationObserver() {
