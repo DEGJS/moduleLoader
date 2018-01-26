@@ -11,12 +11,6 @@ const moduleLoader = function(options = {}) {
     const settings = Object.assign({}, defaults, options);
 
     function init() {
-        const elsWithModules = [...document.querySelectorAll(`[${settings.moduleDataAttr}]`)];
-        loadModules(elsWithModules);
-        initMutationObserver();
-    }
-
-    function initMutationObserver() {
         const observer = new MutationObserver(onMutation);
         observer.observe(document.body, mutationConfig);
     }
@@ -30,7 +24,7 @@ const moduleLoader = function(options = {}) {
 
     function getModuleEls(mutation) {
         const addedEls = [...mutation.addedNodes];
-        return addedEls.filter(el => el.dataset && typeof el.dataset.module !== 'undefined');
+        return addedEls.filter(el => el.dataset && el.dataset.module !== 'undefined');
     }
 
     function loadModules(els) {
