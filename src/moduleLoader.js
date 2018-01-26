@@ -1,5 +1,3 @@
-import {ensureArray} from 'DEGJS/objectUtils';
-
 const moduleLoader = function(options = {}) {
 
     const defaults = {
@@ -30,7 +28,6 @@ const moduleLoader = function(options = {}) {
     }
 
     function loadModules(els) {
-        els = ensureArray(els);
         els.forEach(el => {
             const module = el.getAttribute(settings.moduleDataAttr);
             const props = {
