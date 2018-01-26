@@ -42,14 +42,6 @@ moduleLoader uses the [MutationObserver](https://developer.mozilla.org/en-US/doc
 ```js
 import moduleLoader from "DEGJS/moduleLoader";
 
-<div class="my-components my-component-1" data-module="components/myComponent1">
-    Component 1
-</div>
-
-<div class="my-components my-component-2" data-module="components/myComponent2">
-    Component 2
-</div>
-
 moduleLoader();
 
 document.body.insertAdjacentHTML('beforeend', `
