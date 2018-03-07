@@ -26,10 +26,10 @@ const moduleLoader = function(options = {}) {
     }
 
     function onMutation(mutationsList) {
-        for (const mutation of mutationsList) {
+        mutationsList.forEach(mutation => {
             const moduleEls = getModuleEls(mutation);
             loadModules(moduleEls);
-        }
+        });
     }
 
     function getModuleEls(mutation) {
