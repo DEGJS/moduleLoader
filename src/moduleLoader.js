@@ -21,8 +21,10 @@ const moduleLoader = function(options = {}) {
     }
 
     function initMutationObserver() {
-        const observer = new MutationObserver(onMutation);
-        observer.observe(settings.elToObserve, mutationConfig);
+        if (window.MutationObserver) {
+            const observer = new MutationObserver(onMutation);
+            observer.observe(settings.elToObserve, mutationConfig);
+        }
     }
 
     function onMutation(mutationsList) {
