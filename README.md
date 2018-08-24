@@ -71,6 +71,12 @@ Type: `Boolean`
 In some cases, you may know that no elements with modules will be added to the page after page load. Setting to `false` disables the potentially expensive mutation observer.  
 Default: `true`
 
+#### options.loadingMethod
+Type: `String`   
+By default, moduleLoader will attempt to load native JavaScript modules using the `import()` method, but will automatically fall back to SystemJS's `System.import()` method in unsupported browsers. This behavior can be overridden with this setting.
+Options: `'auto', 'system', 'esm'`
+Default: `'auto'`
+
 ## Browser Support
 moduleLoader depends on the following browser APIs:
 + MutationObserver: [Documentation](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) | [Polyfill](https://github.com/megawac/MutationObserver.js) (Note: moduleLoader 4.0.2+ will work in IE10 without a polyfill, but dynamic module loading after the DOM is loaded will not. For IE10, either polyfill or use [moduleLoader 3.0.1](https://github.com/DEGJS/moduleLoader/tree/3.0.1))

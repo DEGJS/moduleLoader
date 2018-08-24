@@ -3,7 +3,8 @@ const moduleLoader = function(options = {}) {
     const defaults = {
         moduleDataAttr: 'data-module',
         elToObserve: document.body,
-        enableObservation: true
+        enableObservation: true,
+        loadingMethod: 'auto'
     };
     const mutationConfig = {
         attributes: false,
@@ -11,6 +12,7 @@ const moduleLoader = function(options = {}) {
         childList: true
     };
     const settings = {...defaults, ...options};
+    const dynamicImportsSupported = supportsDynamicImports();
 
     function init() {
         const elsWithModules = [...document.querySelectorAll(`[${settings.moduleDataAttr}]`)];
@@ -40,17 +42,31 @@ const moduleLoader = function(options = {}) {
     }
 
     function loadModules(els) {
+        const loadEsm = settings.loadingMethod === 'esm' || (settings.loadingMethod === 'auto' && supportsDynamicImports === true);
         els.forEach(el => {
             const module = el.getAttribute(settings.moduleDataAttr);
             const props = {
                 containerElement: el
             };
-            System.import(module).then(mod => mod.default(props));
+            if (loadEsm) {
+                import(module).then(mod => mod.default(props));
+            } else {
+                System.import(module).then(mod => mod.default(props));
+            }
         });
     }
 
     function isElement(item) {
         return item instanceof Element;
+    }
+
+    function supportsDynamicImports() {
+        try {
+            new Function('import("")');
+            return true;
+        } catch (err) {
+            return false;
+        }
     }
 
     init();
