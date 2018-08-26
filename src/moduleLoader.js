@@ -4,7 +4,9 @@ const moduleLoader = function(options = {}) {
         moduleDataAttr: 'data-module',
         elToObserve: document.body,
         enableObservation: true,
-        loadingMethod: 'auto'
+        loadingMethod: 'auto',
+        basePath: '/js/',
+        filenameSuffix: '-bundle.js'
     };
     const mutationConfig = {
         attributes: false,
@@ -45,13 +47,16 @@ const moduleLoader = function(options = {}) {
         const loadEsm = settings.loadingMethod === 'esm' || (settings.loadingMethod === 'auto' && dynamicImportsSupported === true);
         els.forEach(el => {
             const module = el.getAttribute(settings.moduleDataAttr);
+            const resolvedBasepath = el.dataset.basepath || settings.basePath;
+            const resolvedSuffix = el.dataset.suffix || settings.filenameSuffix;
+            const modulePath = `${resolvedBasepath}${module}${resolvedSuffix}`
             const props = {
                 containerElement: el
             };
             if (loadEsm) {
-                import(module).then(mod => mod.default(props));
+                import(modulePath).then(mod => mod.default(props));
             } else {
-                System.import(module).then(mod => mod.default(props));
+                System.import(modulePath).then(mod => mod.default(props));
             }
         });
     }

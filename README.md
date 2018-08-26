@@ -74,8 +74,18 @@ Default: `true`
 #### options.loadingMethod
 Type: `String`   
 By default, moduleLoader will attempt to load native JavaScript modules using the `import()` method, but will automatically fall back to SystemJS's `System.import()` method in unsupported browsers. This behavior can be overridden with this setting.
-Options: `'auto', 'system', 'esm'`
-Default: `'auto'`
+Options: `auto, system, esm`
+Default: `auto`
+
+#### options.basePath
+Type: `String`   
+The base path of the JS module. This can be overridden at the element level by adding a `data-basepath` attribute to the element.
+Default: `/js/`
+
+#### options.filenameSuffix
+Type: `String`   
+The suffix of the JS module being loaded. This can be overridden at the element level by adding a `data-suffix` attribute to the element.
+Default: `-bundle.js`
 
 ## Browser Support
 moduleLoader depends on the following browser APIs:
