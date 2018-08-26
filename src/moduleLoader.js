@@ -42,7 +42,7 @@ const moduleLoader = function(options = {}) {
     }
 
     function loadModules(els) {
-        const loadEsm = settings.loadingMethod === 'esm' || (settings.loadingMethod === 'auto' && supportsDynamicImports === true);
+        const loadEsm = settings.loadingMethod === 'esm' || (settings.loadingMethod === 'auto' && dynamicImportsSupported === true);
         els.forEach(el => {
             const module = el.getAttribute(settings.moduleDataAttr);
             const props = {
