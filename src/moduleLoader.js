@@ -3,7 +3,10 @@ const moduleLoader = function(options = {}) {
     const defaults = {
         moduleDataAttr: 'data-module',
         elToObserve: document.body,
-        enableObservation: true
+        enableObservation: true,
+        loadingMethod: 'auto',
+        basePath: '/js/',
+        filenameSuffix: '-bundle.js'
     };
     const mutationConfig = {
         attributes: false,
@@ -11,6 +14,7 @@ const moduleLoader = function(options = {}) {
         childList: true
     };
     const settings = {...defaults, ...options};
+    const dynamicImportsSupported = supportsDynamicImports();
 
     function init() {
         const elsWithModules = [...document.querySelectorAll(`[${settings.moduleDataAttr}]`)];
@@ -40,17 +44,34 @@ const moduleLoader = function(options = {}) {
     }
 
     function loadModules(els) {
+        const loadEsm = settings.loadingMethod === 'esm' || (settings.loadingMethod === 'auto' && dynamicImportsSupported === true);
         els.forEach(el => {
             const module = el.getAttribute(settings.moduleDataAttr);
+            const resolvedBasepath = el.dataset.basepath || settings.basePath;
+            const resolvedSuffix = el.dataset.suffix || settings.filenameSuffix;
+            const modulePath = `${resolvedBasepath}${module}${resolvedSuffix}`
             const props = {
                 containerElement: el
             };
-            System.import(module).then(mod => mod.default(props));
+            if (loadEsm) {
+                import(modulePath).then(mod => mod.default(props));
+            } else {
+                System.import(modulePath).then(mod => mod.default(props));
+            }
         });
     }
 
     function isElement(item) {
         return item instanceof Element;
+    }
+
+    function supportsDynamicImports() {
+        try {
+            new Function('import("")');
+            return true;
+        } catch (err) {
+            return false;
+        }
     }
 
     init();
