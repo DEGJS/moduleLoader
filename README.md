@@ -4,19 +4,13 @@ Whenever possible, it's best to bundle modules during development. However, in c
 The moduleLoader module does exactly that, either on page load or on demand via an HTML attribute.
 
 ## Install
-moduleLoader is an ES6 module. Consequently, you'll need an ES6 transpiler ([Babel](https://babeljs.io) is a nice one) and a module loader as part of your Javascript workflow.
+moduleLoader is an ES6 module. Consequently, you may need a transpiler ([Babel](https://babeljs.io) is a nice one) to compile moduleLoader into compatible Javascript for your runtime environment.
 
-If you're already using the [JSPM package manager](http://jspm.io) for your project, you can install moduleLoader with the following command:
+If you're using NPM, you can install moduleLoader with the following command:
 
 ```
-$ jspm install github:DEGJS/moduleLoader
+$ npm install @degjs/module-loader
 ```
-
-## Dependencies
-JSPM automatically installs and configures this module's dependencies for you. However, if you manually install this module without using JSPM, you'll also need to manually install these dependencies:
-
-* [objectUtils](https://github.com/DEGJS/objectUtils)
-* moduleLoader requires [SystemJS](https://github.com/systemjs/systemjs) and will only work with v0.19.x or earlier, as it uses its `System.import()` method to load modules.
 
 ## Usage
 Regardless of whether you load modules on page load or on demand, you must set the `data-module` attribute on your HTML elements:
@@ -32,7 +26,7 @@ Regardless of whether you load modules on page load or on demand, you must set t
 
 ### Option A: Load modules on page load
 ```js
-import moduleLoader from "DEGJS/moduleLoader";
+import moduleLoader from "@degjs/module-loader";
 
 moduleLoader();
 ```
@@ -40,7 +34,7 @@ moduleLoader();
 ### Option B: Load modules on demand
 moduleLoader uses the [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) API to watch for elements with `data-module` attributes that are added to the DOM by JavaScript after the page is loaded.  
 ```js
-import moduleLoader from "DEGJS/moduleLoader";
+import moduleLoader from "@degjs/module-loader";
 
 moduleLoader();
 
