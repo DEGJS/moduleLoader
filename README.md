@@ -9,7 +9,7 @@ moduleLoader is an ES6 module. Consequently, you may need a transpiler ([Babel](
 If you're using NPM, you can install moduleLoader with the following command:
 
 ```
-$ npm install @degjs/moduleLoader
+$ npm install @degjs/module-loader
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ Regardless of whether you load modules on page load or on demand, you must set t
 
 ### Option A: Load modules on page load
 ```js
-import moduleLoader from "@degjs/moduleLoader";
+import moduleLoader from "@degjs/module-loader";
 
 moduleLoader();
 ```
@@ -34,7 +34,7 @@ moduleLoader();
 ### Option B: Load modules on demand
 moduleLoader uses the [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) API to watch for elements with `data-module` attributes that are added to the DOM by JavaScript after the page is loaded.  
 ```js
-import moduleLoader from "@degjs/moduleLoader";
+import moduleLoader from "@degjs/module-loader";
 
 moduleLoader();
 
