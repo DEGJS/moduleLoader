@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+- node
+cache:
+  directories:
+  - node_modules
+deploy:
+  provider: npm
+  email: heaper@gmail.com
+  on:
+    branch: master
+    tags: true
+    repo: DEGJS/module-loader
+  api-key:
+    secure: Ec1MxV1V4QwuAcSRr5PVyTa5LWxXziXDcAHWe1RJX1ES9ZjS4igi+P3YIPoAiHn9xEcJTqiMto6Q/ZWewZg5QYhLx1GFMYI4XBIAiV8k65YrP02ls6qgxoLD1OC1wfuMw+oM9jeUWz9mfv+8huyn5My9lVg1y6AZPyaZo51algbVxNgfetsxryo/YIymAmJoGUMHLdNLM1nVd9vvW8oUArPumyTYG7uiGqNTvAwz5geEP852WMhBPAC7rzY32ikQ6QrFc2/1JD2PTWtw7cTR1/Galf6tQYj9VujTAPXpe/MiAoB1TgpBJaI349/99LS7dQQ12kUptTrRayVJba5P4nHDaEW2cW2OKtWAutEs69pCcBxo0P8CG7wKIcZ2M0NzIoKVPTmpafKoXinVDrtZCIfbCyByVsZOYWHjW1vrS3HCkTtCMHX7SJmwEWm80Oo9SN/p5R3lOlcryknf8nA3/a6qaEX5UnzruOhw2aTrSDkI132PnsreOXV9I33AX2ZtlnzQBQ0Ff7M+VFiEBLAnMxNyqDI3KVQfGr8boG8m1axusbH5vEy63TCgeTdZaUWrhitJ1k2+yWR/5CrJ8qjrPnft4ED2nYSKpBGWj/kTQwqt95KHCjO7MgeEmdc7PjXAVdvajw/tAHHROLCn8CUwOVRzTfuh0JO6XbGF9FUjwLc=
