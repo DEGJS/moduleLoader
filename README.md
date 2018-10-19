@@ -80,12 +80,12 @@ Default: `/js/`
 
 #### options.filenameSuffix
 Type: `String`   
-The suffix of the JS bundle being loaded in module-supporting browsers. This can be overridden at the element level by adding a `data-suffix` attribute to the element.
+The suffix of the JS bundle being loaded in browsers that support modules. This can be overridden at the element level by adding a `data-suffix` attribute to the element.
 Default: `-bundle.js`
 
 #### options.filenameNoModuleSuffix
 Type: `String`   
-The suffix of the JS bundle being loaded in non-module-supporting browsers. This can be overridden at the element level by adding a `data-suffix` attribute to the element.
+The suffix of the JS bundle being loaded in browsers that don't support modules. This can be overridden at the element level by adding a `data-no-module-suffix` attribute to the element.
 Default: `-bundle-nomodule.js`
 
 ## Browser Support
