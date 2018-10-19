@@ -1,6 +1,6 @@
 {
     "name": "@degjs/module-loader",
-    "version": "5.0.0",
+    "version": "5.0.1",
     "description": "Asynchronously load JavaScript modules via an HTML attribute.",
     "keywords": [
         "DEGJS"
