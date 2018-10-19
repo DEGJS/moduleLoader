@@ -6,7 +6,8 @@ const moduleLoader = function(options = {}) {
         enableObservation: true,
         loadingMethod: 'auto',
         basePath: '/js/',
-        filenameSuffix: '-bundle.js'
+        filenameSuffix: '-bundle.js',
+        filenameNoModuleSuffix: '-bundle-nomodule.js'
     };
     const mutationConfig = {
         attributes: false,
@@ -49,13 +50,16 @@ const moduleLoader = function(options = {}) {
             const module = el.getAttribute(settings.moduleDataAttr);
             const resolvedBasepath = el.dataset.basepath || settings.basePath;
             const resolvedSuffix = el.dataset.suffix || settings.filenameSuffix;
-            const modulePath = `${resolvedBasepath}${module}${resolvedSuffix}`
+            const resolvedNoModuleSuffix = el.dataset.noModuleSuffix || settings.filenameNoModuleSuffix;
+            let modulePath;
             const props = {
                 containerElement: el
             };
             if (loadEsm) {
+                modulePath = `${resolvedBasepath}${module}${resolvedSuffix}`;
                 import(modulePath).then(mod => mod.default(props));
             } else {
+                modulePath = `${resolvedBasepath}${module}${resolvedNoModuleSuffix}`;
                 System.import(modulePath).then(mod => mod.default(props));
             }
         });
