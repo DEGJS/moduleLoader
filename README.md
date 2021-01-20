@@ -1,5 +1,5 @@
 # moduleLoader
-[![Build Status](https://travis-ci.org/DEGJS/moduleLoader.svg?branch=master)](https://travis-ci.org/DEGJS/moduleLoader)
+![Run Tests](https://github.com/DEGJS/moduleLoader/workflows/Run%20Tests/badge.svg)
 
 Whenever possible, it's best to bundle modules during development. However, in certain situations (such as a restrictive CMS, or when loading JavaScript after a specific user interaction), it may be necessary to load a module asynchronously at runtime.
 
